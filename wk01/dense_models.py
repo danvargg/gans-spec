@@ -1,10 +1,12 @@
 """Basic models."""
-from tqdm import tqdm
+from tqdm.auto import tqdm
 
 import torch
 from torch import nn
 import torchvision as tv
 from torchvision import transforms
+
+torch.manual_seed(0)
 
 
 def generator_block(input_dim: int, output_dim: int) -> nn.Sequential:
@@ -176,7 +178,7 @@ def get_disc_loss(
 
 
 def get_gen_loss(gen: Generator, disc: Discriminator, criterion: nn.BCEWithLogitsLoss, num_images: int, z_dim: int,
-             device: str) -> torch.Tensor:
+                 device: str) -> torch.Tensor:
     """
     Return the loss of the generator given inputs.
     Parameters:
